@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--    配置bean==>student-->
+    <bean id="student" class="com.kingwan.pojo.Student"/>
+    <bean id="student1" class="com.kingwan.pojo.Student"/>
+    <bean id="student2" class="com.kingwan.pojo.Student"/>
+    <!--    别名设置，将[bean:student]取别名[bean:stu]-->
+    <alias name="student" alias="stu"></alias>
+
+    <!--    配置bean==>teacher-->
+    <!--        1. property属性赋值-->
+    <bean id="teacher_property" class="com.kingwan.pojo.Teacher">
+        <property name="address" value="翻斗花园"></property>
+        <property name="age" value="18"></property>
+    </bean>
+    <!--        2. constructor-arg构造函数赋值-->
+    <bean id="teacher_constructor" class="com.kingwan.pojo.Teacher">
+        <constructor-arg name="name" value="张老师"></constructor-arg>
+    </bean>
+    <!--        3. -->
+
+    <!--    复杂bean的配置-->
+    <bean id="classRoom" class="com.kingwan.pojo.ClassRoom">
+        <property name="name" value="网络2020班"/>
+        <property name="population" value="52"/>
+        <property name="teacher" ref="teacher_constructor"/>
+        <property name="students">
+            <list merge="true" value-type="com.kingwan.pojo.Student">
+                <ref bean="student"></ref>
+                <ref bean="student1"></ref>
+                <ref bean="student2"></ref>
+            </list>
+        </property>
+
+    </bean>
+
+</beans>
